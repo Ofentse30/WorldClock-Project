@@ -71,6 +71,7 @@
 
       <select id="city">
         <option value="">Select a city</option>
+        <option value="current">My current location</option>
         <option value="Europe/London">London</option>
         <option value="America/New_York">New York</option>
         <option value="Pacific/Auckland">Auckland</option>
@@ -132,6 +133,11 @@
       
       function updateCity(){
         let cityTimeZone=event.target.value;
+        if(cityTimeZone==="current"){
+          cityTimeZone=moment.tz.guess();
+        }
+
+
         let cityName=cityTimeZone.replace("_", " ").split("/")[1]
         let cityTime=moment().tz(cityTimeZone)
         let citiesElement=document.querySelector("#cities");
